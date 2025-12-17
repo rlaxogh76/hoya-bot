@@ -7,6 +7,7 @@ module.exports = [
 			ecmaVersion: 'latest',
 		},
 		rules: {
+			indent: ['error', 2],
 			'arrow-spacing': ['warn', { before: true, after: true }],
 			'brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
 			'comma-dangle': ['error', 'always-multiline'],

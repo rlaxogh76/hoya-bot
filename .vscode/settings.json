@@ -1,0 +1,16 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": null
+  },
+  "[vue]": {
+    "editor.defaultFormatter": null
+  },
+  "[scss]": {
+    "editor.defaultFormatter": null
+  },
+  "[css]": {
+    "editor.defaultFormatter": null
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

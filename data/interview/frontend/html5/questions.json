@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "author": "rlaxogh76",
+    "authorUrl": "https://github.com/rlaxogh76",
+    "tag": "HTML",
+    "thumbnail": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css",
+    "question": "HTML의 시맨틱 태그에 대해 설명해주세요.",
+    "answer": "||시맨틱 태그는 HTML5에서 도입된 요소들로, 문서의 구조와 의미를 명확하게 나타내기 위해 사용됩니다. 예를 들어, `<header>`, `<nav>`, `<article>`, `<section>`, `<footer>` 등이 있으며, 이러한 태그들은 단순한 레이아웃 목적뿐만 아니라 검색 엔진 최적화(SEO)와 접근성 향상에도 도움을 줍니다.||",
+    "linkName": "HTML 시맨틱 태그 참고 자료",
+    "linkUrl": "https://developer.mozilla.org/ko/docs/Web/HTML/Element#sectioning_root"
+  },
+  {
+    "id": 2,
+    "author": "rlaxogh76",
+    "tag": "HTML",
+    "thumbnail": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css",
+    "question": "HTML5에서 새롭게 추가된 기능들에 대해 설명해주세요.",
+    "answer": "||HTML5에서는 다양한 새로운 기능들이 추가되었습니다. 주요 기능으로는 다음과 같습니다:\n\n1. **시맨틱 요소**: `<article>`, `<section>`, `<nav>`, `<header>`, `<footer>` 등 문서 구조를 명확히 하는 태그들이 도입되었습니다.\n2. **멀티미디어 지원**: `<audio>`와 `<video>` 태그를 통해 플러그인 없이 오디오 및 비디오 콘텐츠를 직접 삽입하고 제어할 수 있습니다.\n3. **그래픽 및 애니메이션**: `<canvas>` 요소를 사용하여 동적인 그래픽과 애니메이션을 그릴 수 있습니다.\n4. **폼 향상**: 새로운 입력 타입(예: `email`, `date`, `range` 등)과 속성(예: `placeholder`, `required` 등)이 추가되어 폼 유효성 검사와 사용자 경험이 개선되었습니다.\n5. **로컬 저장소**: Web Storage API를 통해 클라이언트 측에 데이터를 영구적으로 저장할 수 있는 기능이 제공됩니다.\n6. **지리 위치 API**: 사용자의 위치 정보를 얻을 수 있는 API가 추가되어 위치 기반 서비스를 구현할 수 있습니다.||",
+    "linkName": "HTML5 새로운 기능 참고 자료",
+    "linkUrl": "https://developer.mozilla.org/ko/docs/Web/Guide/HTML/HTML5"
+  }
+]

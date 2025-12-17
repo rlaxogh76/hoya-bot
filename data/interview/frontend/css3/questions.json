@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "author": "rlaxogh76",
+    "tag": "CSS",
+    "thumbnail": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css",
+    "question": "CSS의 박스 모델에 대해 설명해주세요.",
+    "answer": "||CSS 박스 모델은 웹 페이지에서 요소들이 어떻게 배치되고 공간을 차지하는지를 설명하는 개념입니다. 모든 HTML 요소는 사각형 박스로 표현되며, 이 박스는 네 가지 주요 부분으로 구성됩니다: **콘텐츠(content)**, **패딩(padding)**, **보더(border)**, 그리고 **마진(margin)**.\n\n1. **콘텐츠(content)**: 텍스트나 이미지와 같은 실제 내용이 들어가는 영역입니다.\n2. **패딩(padding)**: 콘텐츠와 보더 사이의 공간으로, 콘텐츠 주위에 여백을 추가합니다.\n3. **보더(border)**: 패딩과 마진 사이에 위치한 선으로, 요소의 경계를 정의합니다.\n4. **마진(margin)**: 요소와 다른 요소들 사이의 외부 공간으로, 요소 간의 간격을 조절합니다.||",
+    "linkName": "CSS 박스 모델 참고 자료",
+    "linkUrl": "https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model"
+  },
+  {
+    "id": 2,
+    "author": "rlaxogh76",
+    "tag": "CSS",
+    "thumbnail": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css",
+    "question": "CSS Flexbox에 대해 설명해주세요.",
+    "answer": "||CSS Flexbox(유연한 박스 레이아웃)는 컨테이너 내의 아이템들을 효율적으로 배치하고 정렬하기 위한 레이아웃 모델입니다. Flexbox는 특히 복잡한 레이아웃을 쉽게 구현할 수 있도록 설계되었으며, 아이템들의 크기와 순서를 동적으로 조절할 수 있습니다.\n\nFlexbox의 주요 개념은 다음과 같습니다:\n\n1. **플렉스 컨테이너(Flex Container)**: `display: flex;` 또는 `display: inline-flex;` 속성을 사용하여 정의된 요소로, 그 안의 자식 요소들이 플렉스 아이템이 됩니다.\n2. **플렉스 아이템(Flex Items)**: 플렉스 컨테이너의 직접적인 자식 요소들로, 이들은 플렉스 레이아웃 규칙에 따라 배치됩니다.\n3. **주 축(Main Axis)과 교차 축(Cross Axis)**: 주 축은 플렉스 아이템들이 배치되는 방향이며, 교차 축은 주 축에 수직인 방향입니다. 기본적으로 주 축은 가로 방향입니다.\n4. **정렬 및 정돈**: `justify-content`, `align-items`, `align-content` 등의 속성을 사용하여 아이템들의 정렬과 간격을 조절할 수 있습니다.\n5. **순서 변경**: `order` 속성을 사용하여 플렉스 아이템들의 시각적 순서를 변경할 수 있습니다.||",
+    "references": "CSS Flexbox 참고 자료",
+    "referencesUrl": "https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox"
+  }
+]

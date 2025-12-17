@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "author": "rlaxogh76",
+    "tag": "react",
+    "thumbnail": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css",
+    "question": "React를 사용하는 이유는 뭔가요?",
+    "answer": "||**React**는 **UI**를 만들기 위한 **JavaScript** 라이브러리입니다.\n\n**React**는 스스로 상태를 관리하는 캡슐화된 컴포넌트를 조합해 **복잡한 UI**를 만들 수 있도록 지원하며, 데이터가 변경됨에 따라 **적절한 컴포넌트만 효율적으로 갱신**하고 렌더링합니다.||",
+    "linkName": "React 공식 문서",
+    "linkUrl": "https://react.dev/"
+  },
+  {
+    "id": 2,
+    "author": "rlaxogh76",
+    "tag": "react",
+    "thumbnail": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css",
+    "question": "React의 주요 특징에 대해 설명해주세요.",
+    "answer": "||React의 주요 특징은 다음과 같습니다:\n\n1. **컴포넌트 기반 아키텍처**: UI를 독립적이고 재사용 가능한 컴포넌트로 분할하여 개발합니다.\n2. **가상 DOM(Virtual DOM)**: 실제 DOM 조작을 최소화하여 성능을 향상시키는 가상 DOM을 사용합니다.\n3. **단방향 데이터 흐름**: 데이터가 부모 컴포넌트에서 자식 컴포넌트로 흐르며, 예측 가능한 상태 관리를 가능하게 합니다.\n4. **JSX 문법**: JavaScript와 HTML을 결합한 JSX 문법을 사용하여 UI를 선언적으로 작성할 수 있습니다.\n5. **풍부한 생태계**: 다양한 라이브러리와 도구들이 React와 함께 사용되어 개발 생산성을 높입니다.||",
+    "linkName": "React 주요 특징 참고 자료",
+    "linkUrl": "https://react.dev/learn/thinking-in-react"
+  }
+]
