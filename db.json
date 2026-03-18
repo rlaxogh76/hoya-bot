@@ -1,0 +1,59 @@
+{
+  "interview": [
+    {
+      "id": 1,
+      "author": "rlaxogh76",
+      "authorUrl": "https://github.com/rlaxogh76",
+      "tag": "CSS3",
+      "question": "CSS의 박스 모델에 대해 설명해주세요.",
+      "answer": "||CSS 박스 모델은 웹 페이지에서 요소들이 어떻게 배치되고 공간을 차지하는지를 설명하는 개념입니다. 모든 HTML 요소는 사각형 박스로 표현되며, 이 박스는 네 가지 주요 부분으로 구성됩니다: **콘텐츠(content)**, **패딩(padding)**, **보더(border)**, 그리고 **마진(margin)**.\n\n1. **콘텐츠(content)**: 텍스트나 이미지와 같은 실제 내용이 들어가는 영역입니다.\n2. **패딩(padding)**: 콘텐츠와 보더 사이의 공간으로, 콘텐츠 주위에 여백을 추가합니다.\n3. **보더(border)**: 패딩과 마진 사이에 위치한 선으로, 요소의 경계를 정의합니다.\n4. **마진(margin)**: 요소와 다른 요소들 사이의 외부 공간으로, 요소 간의 간격을 조절합니다.||",
+      "linkName": "CSS 박스 모델 참고 자료",
+      "linkUrl": "https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model",
+      "thumbnailUrl": "https://raw.githubusercontent.com/rlaxogh76/hoya-bot/refs/heads/main/assets/icons/css3.png"
+    },
+    {
+      "id": 2,
+      "author": "rlaxogh76",
+      "authorUrl": "https://github.com/rlaxogh76",
+      "tag": "CSS3",
+      "question": "CSS Flexbox에 대해 설명해주세요.",
+      "answer": "||CSS Flexbox(유연한 박스 레이아웃)는 컨테이너 내의 아이템들을 효율적으로 배치하고 정렬하기 위한 레이아웃 모델입니다. Flexbox는 특히 복잡한 레이아웃을 쉽게 구현할 수 있도록 설계되었으며, 아이템들의 크기와 순서를 동적으로 조절할 수 있습니다.\n\nFlexbox의 주요 개념은 다음과 같습니다:\n\n1. **플렉스 컨테이너(Flex Container)**: `display: flex;` 또는 `display: inline-flex;` 속성을 사용하여 정의된 요소로, 그 안의 자식 요소들이 플렉스 아이템이 됩니다.\n2. **플렉스 아이템(Flex Items)**: 플렉스 컨테이너의 직접적인 자식 요소들로, 이들은 플렉스 레이아웃 규칙에 따라 배치됩니다.\n3. **주 축(Main Axis)과 교차 축(Cross Axis)**: 주 축은 플렉스 아이템들이 배치되는 방향이며, 교차 축은 주 축에 수직인 방향입니다. 기본적으로 주 축은 가로 방향입니다.\n4. **정렬 및 정돈**: `justify-content`, `align-items`, `align-content` 등의 속성을 사용하여 아이템들의 정렬과 간격을 조절할 수 있습니다.\n5. **순서 변경**: `order` 속성을 사용하여 플렉스 아이템들의 시각적 순서를 변경할 수 있습니다.||",
+      "linkName": "CSS Flexbox 참고 자료",
+      "linkUrl": "https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox",
+      "thumbnailUrl": "https://raw.githubusercontent.com/rlaxogh76/hoya-bot/refs/heads/main/assets/icons/css3.png"
+    },
+    {
+      "id": 4,
+      "author": "rlaxogh76",
+      "authorUrl": "https://github.com/rlaxogh76",
+      "tag": "HTML",
+      "question": "HTML의 시맨틱 태그에 대해 설명해주세요.",
+      "answer": "||시맨틱 태그는 HTML5에서 도입된 요소들로, 문서의 구조와 의미를 명확하게 나타내기 위해 사용됩니다. 예를 들어, `<header>`, `<nav>`, `<article>`, `<section>`, `<footer>` 등이 있으며, 이러한 태그들은 단순한 레이아웃 목적뿐만 아니라 검색 엔진 최적화(SEO)와 접근성 향상에도 도움을 줍니다.||",
+      "linkName": "HTML 시맨틱 태그 참고 자료",
+      "linkUrl": "https://developer.mozilla.org/ko/docs/Web/HTML/Element#sectioning_root",
+      "thumbnailUrl": "https://raw.githubusercontent.com/rlaxogh76/hoya-bot/refs/heads/main/assets/icons/html5.png"
+    },
+    {
+      "id": 5,
+      "author": "rlaxogh76",
+      "authorUrl": "https://github.com/rlaxogh76",
+      "tag": "react",
+      "question": "React를 사용하는 이유는 뭔가요?",
+      "answer": "||**React**는 **UI**를 만들기 위한 **JavaScript** 라이브러리입니다.\n\n**React**는 스스로 상태를 관리하는 캡슐화된 컴포넌트를 조합해 **복잡한 UI**를 만들 수 있도록 지원하며, 데이터가 변경됨에 따라 **적절한 컴포넌트만 효율적으로 갱신**하고 렌더링합니다.||",
+      "linkName": "React 공식 문서",
+      "linkUrl": "https://react.dev/",
+      "thumbnailUrl": "https://raw.githubusercontent.com/rlaxogh76/hoya-bot/refs/heads/main/assets/icons/React.png"
+    },
+    {
+      "id": 6,
+      "author": "rlaxogh76",
+      "authorUrl": "https://github.com/rlaxogh76",
+      "tag": "react",
+      "question": "React의 주요 특징에 대해 설명해주세요.",
+      "answer": "||React의 주요 특징은 다음과 같습니다:\n\n1. **컴포넌트 기반 아키텍처**: UI를 독립적이고 재사용 가능한 컴포넌트로 분할하여 개발합니다.\n2. **가상 DOM(Virtual DOM)**: 실제 DOM 조작을 최소화하여 성능을 향상시키는 가상 DOM을 사용합니다.\n3. **단방향 데이터 흐름**: 데이터가 부모 컴포넌트에서 자식 컴포넌트로 흐르며, 예측 가능한 상태 관리를 가능하게 합니다.\n4. **JSX 문법**: JavaScript와 HTML을 결합한 JSX 문법을 사용하여 UI를 선언적으로 작성할 수 있습니다.\n5. **풍부한 생태계**: 다양한 라이브러리와 도구들이 React와 함께 사용되어 개발 생산성을 높입니다.||",
+      "linkName": "React 주요 특징 참고 자료",
+      "linkUrl": "https://react.dev/learn/thinking-in-react",
+      "thumbnailUrl": "https://raw.githubusercontent.com/rlaxogh76/hoya-bot/refs/heads/main/assets/icons/React.png"
+    }
+  ]
+}
