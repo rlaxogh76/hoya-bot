@@ -6,7 +6,6 @@ const {
 	ButtonStyle,
 } = require('discord.js');
 
-// 🔥 fetch (Node 18 이상이면 기본 내장)
 // Node 16이면: const fetch = require('node-fetch');
 
 async function fetchRandomUser() {
