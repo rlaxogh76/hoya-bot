@@ -1,4 +1,3 @@
-/* eslint-disable no-inline-comments */
 // 1. 주요 클래스 가져오기
 const fs = require('node:fs');
 const path = require('node:path');
@@ -11,6 +10,8 @@ const {
 } = require('discord.js');
 const { token } = require('./config.json');
 
+const logger = require('./logger');
+
 // 2. 클라이언트 객체 생성 (Guilds관련, 메시지관련 인텐트 추가)
 const client = new Client({
 	intents: [
@@ -22,21 +23,19 @@ const client = new Client({
 
 // 3. 봇이 준비됐을때 한번만(once) 표시할 메시지
 client.once(Events.ClientReady, (readyClient) => {
-	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+	logger.info(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
 
-// ? 뭔 명령어냐
-
 client.on(Events.InteractionCreate, async (interaction) => {
-	console.log(interaction);
+	logger.info(interaction);
 
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = interaction.client.commands.get(interaction.commandName);
 
 	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
+		logger.error(`No command matching ${interaction.commandName} was found.`);
 		return;
 	}
 
@@ -44,7 +43,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 		await command.execute(interaction);
 	}
 	catch (error) {
-		console.log(error);
+		logger.error(error);
 		if (interaction.replied || interaction.deferred) {
 			await interaction.followUp({
 				content: 'There was an error while executing this command!',
@@ -84,7 +83,7 @@ for (const folder of commandFolders) {
 		}
 		else {
 			// 8. 경고 메시지 출력
-			console.log(
+			logger.warn(
 				`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`,
 			);
 		}
@@ -92,3 +91,11 @@ for (const folder of commandFolders) {
 }
 
 client.login(token);
+
+process.on('uncaughtException', (error) => {
+	logger.error('[uncaughtException]', error);
+});
+
+process.on('unhandledRejection', (reason) => {
+	logger.error('[unhandledRejection]', reason);
+});
