@@ -334,11 +334,14 @@ async function showTextQuestion(session, question, channel) {
 
 	msgCollector.on('collect', async (m) => {
 		if (session.isProcessing) return;
+		const raw = m.content.trim();
+		const answer = raw.startsWith('!정답 ') ? raw.slice('!정답 '.length).trim() : raw;
+		if (!answer) return;
 		session.isProcessing = true;
 		msgCollector.stop('answered');
 		clearTimeout(session.timeoutId);
 
-		await processAnswer(session, m.content.trim(), channel, true);
+		await processAnswer(session, answer, channel, true);
 	});
 
 	session.msgCollector = msgCollector;
