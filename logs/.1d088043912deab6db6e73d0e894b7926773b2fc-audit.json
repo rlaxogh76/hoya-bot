@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\gktra\\Desktop\\Workout\\Coding\\Project\\Alone\\Bot\\hoya-bot\\logs\\.1d088043912deab6db6e73d0e894b7926773b2fc-audit.json",
+    "files": [
+        {
+            "date": 1777346990570,
+            "name": "C:\\Users\\gktra\\Desktop\\Workout\\Coding\\Project\\Alone\\Bot\\hoya-bot\\logs\\2026-04-28.log",
+            "hash": "414e32b62275bb9e6911f681f1a3039b5b5365ad8fbfa92a9169311383901470"
+        },
+        {
+            "date": 1777423744152,
+            "name": "C:\\Users\\gktra\\Desktop\\Workout\\Coding\\Project\\Alone\\Bot\\hoya-bot\\logs\\2026-04-29.log",
+            "hash": "88a7e490327e426184e4334765d200efb0ec56c83bfe20dc15a40a655fea597f"
+        },
+        {
+            "date": 1778027149260,
+            "name": "C:\\Users\\gktra\\Desktop\\Workout\\Coding\\Project\\Alone\\Bot\\hoya-bot\\logs\\2026-05-06.log",
+            "hash": "a554545c31be2c65af1e575021af16641f7f9b6c5c8027fc397964947dd551fa"
+        },
+        {
+            "date": 1778285210783,
+            "name": "C:\\Users\\gktra\\Desktop\\Workout\\Coding\\Project\\Alone\\Bot\\hoya-bot\\logs\\2026-05-09.log",
+            "hash": "b60d519e9d32579fe31d1ace55e461c32fe52b6b857dc4893de7847f92d46377"
+        }
+    ],
+    "hashType": "sha256"
+}
