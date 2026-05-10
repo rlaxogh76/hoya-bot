@@ -1,0 +1,89 @@
+{
+  "1323453523827884123": {
+    "867071958071771157": {
+      "username": "h0_y4.",
+      "totalScore": 185,
+      "correctCount": 7,
+      "totalAnswered": 10,
+      "byCategory": {
+        "db": {
+          "correct": 4,
+          "total": 5
+        },
+        "backend": {
+          "correct": 1,
+          "total": 2
+        },
+        "frontend": {
+          "correct": 2,
+          "total": 2
+        },
+        "devops": {
+          "correct": 0,
+          "total": 1
+        }
+      },
+      "byLogo": {
+        "Redis": {
+          "correct": 1,
+          "total": 1,
+          "difficulty": "easy"
+        },
+        "Django": {
+          "correct": 1,
+          "total": 1,
+          "difficulty": "easy"
+        },
+        "MongoDB": {
+          "correct": 1,
+          "total": 1,
+          "difficulty": "easy"
+        },
+        "Vue.js": {
+          "correct": 1,
+          "total": 1,
+          "difficulty": "easy"
+        },
+        "MySQL": {
+          "correct": 1,
+          "total": 1,
+          "difficulty": "easy"
+        },
+        "Alpine.js": {
+          "correct": 1,
+          "total": 1,
+          "difficulty": "hard"
+        },
+        "Ktor": {
+          "correct": 0,
+          "total": 1,
+          "difficulty": "hard"
+        },
+        "Cosmos DB": {
+          "correct": 1,
+          "total": 1,
+          "difficulty": "hard"
+        },
+        "Apache Cassandra": {
+          "correct": 0,
+          "total": 1,
+          "difficulty": "hard"
+        },
+        "Grafana": {
+          "correct": 0,
+          "total": 1,
+          "difficulty": "hard"
+        }
+      },
+      "collectedIds": [
+        "logo_redis",
+        "logo_django",
+        "logo_mongodb",
+        "logo_vue",
+        "logo_mysql",
+        "logo_alpinejs",
+        "logo_cosmos"
+      ]
+    }
+  }
+}
