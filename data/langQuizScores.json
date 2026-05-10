@@ -1,0 +1,134 @@
+{
+  "1323453523827884123": {
+    "867071958071771157": {
+      "username": "h0_y4.",
+      "totalScore": 152,
+      "correctCount": 12,
+      "totalAnswered": 20,
+      "byLanguage": {
+        "Java": {
+          "correct": 3,
+          "total": 3
+        },
+        "Python": {
+          "correct": 3,
+          "total": 4
+        },
+        "C++": {
+          "correct": 3,
+          "total": 3
+        },
+        "Go": {
+          "correct": 1,
+          "total": 3
+        },
+        "JavaScript": {
+          "correct": 2,
+          "total": 3
+        },
+        "Rust": {
+          "correct": 0,
+          "total": 1
+        },
+        "Ruby": {
+          "correct": 0,
+          "total": 1
+        },
+        "Smalltalk": {
+          "correct": 0,
+          "total": 1
+        },
+        "J": {
+          "correct": 0,
+          "total": 1
+        }
+      },
+      "byDifficulty": {
+        "easy": {
+          "correct": 12,
+          "total": 16
+        },
+        "normal": {
+          "correct": 0,
+          "total": 2
+        },
+        "expert": {
+          "correct": 0,
+          "total": 2
+        }
+      }
+    },
+    "931200201375502386": {
+      "username": "rjsgud49",
+      "totalScore": 51,
+      "correctCount": 4,
+      "totalAnswered": 10,
+      "byLanguage": {
+        "JavaScript": {
+          "correct": 1,
+          "total": 2
+        },
+        "C++": {
+          "correct": 1,
+          "total": 2
+        },
+        "Go": {
+          "correct": 1,
+          "total": 3
+        },
+        "C": {
+          "correct": 1,
+          "total": 2
+        },
+        "TypeScript": {
+          "correct": 0,
+          "total": 1
+        }
+      },
+      "byDifficulty": {
+        "easy": {
+          "correct": 4,
+          "total": 10
+        }
+      }
+    },
+    "918068932152270908": {
+      "username": "qlellow",
+      "totalScore": 195,
+      "correctCount": 10,
+      "totalAnswered": 10,
+      "byLanguage": {
+        "C": {
+          "correct": 1,
+          "total": 1
+        },
+        "TypeScript": {
+          "correct": 3,
+          "total": 3
+        },
+        "Go": {
+          "correct": 1,
+          "total": 1
+        },
+        "C++": {
+          "correct": 2,
+          "total": 2
+        },
+        "Python": {
+          "correct": 2,
+          "total": 2
+        },
+        "Java": {
+          "correct": 1,
+          "total": 1
+        }
+      },
+      "byDifficulty": {
+        "easy": {
+          "correct": 10,
+          "total": 10
+        }
+      }
+    }
+  }
+}
