@@ -18,8 +18,6 @@ const logger = require('./logger');
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent,
 	],
 });
 
@@ -92,7 +90,12 @@ for (const filePath of loadCommandFiles(foldersPath)) {
 initDb()
 	.then(() => client.login(token))
 	.catch((err) => {
-		logger.error('[initDb 실패]', err);
+		if (err.message?.includes('intent') || err.code === 4014) {
+			logger.error('[Discord 로그인 실패] 인텐트 설정을 확인하세요:', err.message);
+		}
+		else {
+			logger.error('[초기화 실패]', err);
+		}
 		process.exit(1);
 	});
 
