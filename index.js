@@ -1,4 +1,5 @@
 // 1. 주요 클래스 가져오기
+require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
 const {
