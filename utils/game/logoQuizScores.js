@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_FILE = path.join(__dirname, '../../../data/langQuizScores.json');
+const DATA_FILE = path.join(__dirname, '../../data/logoQuizScores.json');
 
 function loadScores() {
 	try {
@@ -27,14 +27,15 @@ function ensureUser(scores, guildId, userId) {
 			totalScore: 0,
 			correctCount: 0,
 			totalAnswered: 0,
-			byLanguage: {},
-			byDifficulty: {},
+			byCategory: {},
+			byLogo: {},
+			collectedIds: [],
 		};
 	}
 	return scores[guildId][userId];
 }
 
-function recordAnswer({ guildId, userId, username, language, difficulty, isCorrect, points }) {
+function recordAnswer({ guildId, userId, username, logoId, logoName, category, difficulty, isCorrect, points }) {
 	const scores = loadScores();
 	const user = ensureUser(scores, guildId, userId);
 
@@ -44,15 +45,18 @@ function recordAnswer({ guildId, userId, username, language, difficulty, isCorre
 	if (isCorrect) {
 		user.correctCount++;
 		user.totalScore += points;
+		if (!user.collectedIds.includes(logoId)) {
+			user.collectedIds.push(logoId);
+		}
 	}
 
-	if (!user.byLanguage[language]) user.byLanguage[language] = { correct: 0, total: 0 };
-	user.byLanguage[language].total++;
-	if (isCorrect) user.byLanguage[language].correct++;
+	if (!user.byCategory[category]) user.byCategory[category] = { correct: 0, total: 0 };
+	user.byCategory[category].total++;
+	if (isCorrect) user.byCategory[category].correct++;
 
-	if (!user.byDifficulty[difficulty]) user.byDifficulty[difficulty] = { correct: 0, total: 0 };
-	user.byDifficulty[difficulty].total++;
-	if (isCorrect) user.byDifficulty[difficulty].correct++;
+	if (!user.byLogo[logoName]) user.byLogo[logoName] = { correct: 0, total: 0, difficulty };
+	user.byLogo[logoName].total++;
+	if (isCorrect) user.byLogo[logoName].correct++;
 
 	saveScores(scores);
 }
@@ -71,4 +75,18 @@ function getUserStats(guildId, userId) {
 	return scores[guildId]?.[userId] ?? null;
 }
 
-module.exports = { recordAnswer, getServerRanking, getUserStats };
+function getGlobalLogoStats(guildId) {
+	const scores = loadScores();
+	if (!scores[guildId]) return {};
+	const logoStats = {};
+	for (const user of Object.values(scores[guildId])) {
+		for (const [logo, d] of Object.entries(user.byLogo ?? {})) {
+			if (!logoStats[logo]) logoStats[logo] = { correct: 0, total: 0 };
+			logoStats[logo].correct += d.correct;
+			logoStats[logo].total += d.total;
+		}
+	}
+	return logoStats;
+}
+
+module.exports = { recordAnswer, getServerRanking, getUserStats, getGlobalLogoStats };

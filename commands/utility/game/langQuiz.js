@@ -6,8 +6,8 @@ const {
 	ButtonStyle,
 } = require('discord.js');
 
-const { QUESTIONS } = require('./langQuizData');
-const { recordAnswer, getServerRanking, getUserStats } = require('./langQuizScores');
+const { QUESTIONS } = require('../../../utils/game/langQuizData');
+const { recordAnswer, getServerRanking, getUserStats } = require('../../../utils/game/langQuizScores');
 
 const sessions = new Map(); // key: `${guildId}_${userId}`
 

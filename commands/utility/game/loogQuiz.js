@@ -8,8 +8,8 @@ const {
 } = require('discord.js');
 const path = require('path');
 
-const { LOGOS } = require('./logoQuizData');
-const { recordAnswer, getServerRanking, getUserStats } = require('./logoQuizScores');
+const { LOGOS } = require('../../../utils/game/logoQuizData');
+const { recordAnswer, getServerRanking, getUserStats } = require('../../../utils/game/logoQuizScores');
 
 const sessions = new Map(); // key: `${guildId}_${userId}`
 
