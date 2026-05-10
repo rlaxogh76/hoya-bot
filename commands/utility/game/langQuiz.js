@@ -82,11 +82,14 @@ function checkTextAnswer(input, expected) {
 }
 
 function getTier(score) {
-	if (score >= 10000) return '👑 Esolang God';
-	if (score >= 5000) return '💎 Polyglot Master';
-	if (score >= 2000) return '🥇 Lang Hunter';
-	if (score >= 500) return '🥈 Code Reader';
-	return '🥉 Syntax Newbie';
+	if (score >= 10000) return '<:diamond_tier:1502949178945572924> Esolang God';
+	if (score >= 5000) return '<:opal_tier:1502949183513170084> Polyglot Master';
+	if (score >= 3500) return '<:ruby_tier:1502949186801500261> Lang Expert';
+	if (score >= 2000) return '<:platinum_tier:1502949185413185586> Lang Hunter';
+	if (score >= 1000) return '<:emerald_tier:1502949180560113694> Code Learner';
+	if (score >= 500) return '<:gold_tier:1502949182162599946> Code Reader';
+	if (score >= 100) return '<:silver_tier:1502949188227436585> Syntax Learner';
+	return '<:bronze_tier:1502949177209127015> Syntax Newbie';
 }
 
 function getComboBonus(combo) {

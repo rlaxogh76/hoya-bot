@@ -66,10 +66,14 @@ function getComboBonus(combo) {
 }
 
 function getTier(score) {
-	if (score >= 5000) return '💎 Logo Legend';
-	if (score >= 2000) return '🥇 Tech Sommelier';
-	if (score >= 500) return '🥈 Stack Reader';
-	return '🥉 Logo Newbie';
+	if (score >= 5000) return '<:diamond_tier:1502949178945572924> Logo Legend';
+	if (score >= 4000) return '<:opal_tier:1502949183513170084> Logo Master';
+	if (score >= 3000) return '<:ruby_tier:1502949186801500261> Logo Expert';
+	if (score >= 2000) return '<:platinum_tier:1502949185413185586> Tech Sommelier';
+	if (score >= 1000) return '<:emerald_tier:1502949180560113694> Stack Learner';
+	if (score >= 500) return '<:gold_tier:1502949182162599946> Stack Reader';
+	if (score >= 100) return '<:silver_tier:1502949188227436585> Logo Learner';
+	return '<:bronze_tier:1502949177209127015> Logo Newbie';
 }
 
 function getQuestionTime(difficulty) {
