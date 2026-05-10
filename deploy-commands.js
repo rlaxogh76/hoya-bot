@@ -2,7 +2,6 @@ require('dotenv').config();
 const { REST, Routes } = require('discord.js');
 const token = process.env.DISCORD_TOKEN;
 const clientId = process.env.DISCORD_CLIENT_ID;
-const guildId = process.env.DISCORD_GUILD_ID;
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -44,8 +43,7 @@ const rest = new REST().setToken(token);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId), // 특정 서버만 허용 
-			// Routes.applicationCommands(clientId), // 모든 서버 허용
+			Routes.applicationCommands(clientId), // 모든 서버 허용
 			{ body: commands },
 		);
 
