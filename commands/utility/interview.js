@@ -5,22 +5,12 @@ const {
 	ButtonBuilder,
 	ButtonStyle,
 } = require('discord.js');
+const pool = require('../../utils/db');
 
-// Node 16이면: const fetch = require('node-fetch');
-
-async function fetchRandomUser() {
-	const res = await fetch('http://localhost:3000/interview');
-
-	if (!res.ok) {
-		throw new Error(`API 오류: ${res.status}`);
-	}
-
-	const interviews = await res.json();
-
-	if (!interviews.length) return null;
-
-	const randomIndex = Math.floor(Math.random() * interviews.length);
-	return interviews[randomIndex];
+async function fetchRandomInterview() {
+	const [rows] = await pool.execute('SELECT * FROM interview');
+	if (!rows.length) return null;
+	return rows[Math.floor(Math.random() * rows.length)];
 }
 
 module.exports = {
@@ -30,8 +20,7 @@ module.exports = {
 
 	async execute(interaction) {
 		try {
-			// API에서 랜덤 질문 가져오기
-			const q = await fetchRandomUser();
+			const q = await fetchRandomInterview();
 
 			if (!q) {
 				return interaction.reply('질문 데이터를 불러오지 못했습니다.');
@@ -40,18 +29,18 @@ module.exports = {
 			const question = q.question ?? '질문 없음';
 			const answer = q.answer ?? '답변 없음';
 
-			const references = q.linkUrl
-				? `[${q.linkName ?? '자료 보기'}](${q.linkUrl})`
+			const references = q.link_url
+				? `[${q.link_name || '자료 보기'}](${q.link_url})`
 				: '관련 자료 없음';
 
 			const thumbnail =
-        typeof q.thumbnailUrl === 'string'
-        	? q.thumbnailUrl.replace('.svg', '.png')
+        typeof q.thumbnail_url === 'string'
+        	? q.thumbnail_url.replace('.svg', '.png')
         	: null;
 
 			const validUrl =
-        typeof q.authorUrl === 'string' && q.authorUrl.startsWith('http')
-        	? q.authorUrl
+        typeof q.author_url === 'string' && q.author_url.startsWith('http')
+        	? q.author_url
         	: null;
 
 			const cleanAnswer = answer.replace(/\|\|/g, '');
