@@ -49,12 +49,14 @@ client.on(Events.InteractionCreate, async (interaction) => {
 				content: 'There was an error while executing this command!',
 				flags: MessageFlags.Ephemeral,
 			});
+			logger.error('Error while executing command:', error);
 		}
 		else {
 			await interaction.reply({
 				content: 'There was an error while executing this command!',
 				flags: MessageFlags.Ephemeral,
 			});
+			logger.error('Error while executing command:', error);
 		}
 	}
 });
