@@ -576,7 +576,7 @@ async function handleHint(interaction) {
 }
 
 async function handleRanking(interaction) {
-	const ranking = getServerRanking(interaction.guildId);
+	const ranking = await getServerRanking(interaction.guildId);
 
 	if (ranking.length === 0) {
 		return interaction.reply({ content: '아직 기록된 점수가 없습니다.', ephemeral: true });
@@ -604,7 +604,7 @@ async function handleRanking(interaction) {
 
 async function handleStats(interaction) {
 	const targetUser = interaction.options.getUser('사용자') ?? interaction.user;
-	const stats = getUserStats(interaction.guildId, targetUser.id);
+	const stats = await getUserStats(interaction.guildId, targetUser.id);
 
 	if (!stats) {
 		return interaction.reply({
