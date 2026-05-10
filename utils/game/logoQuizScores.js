@@ -1,86 +1,90 @@
-const fs = require('fs');
-const path = require('path');
+const pool = require('../db');
 
-const DATA_FILE = path.join(__dirname, '../../data/logoQuizScores.json');
+async function recordAnswer({ guildId, userId, username, logoId, logoName, category, difficulty, isCorrect, points }) {
+	const [[row]] = await pool.execute(
+		'SELECT * FROM logo_quiz_scores WHERE guild_id = ? AND user_id = ?',
+		[guildId, userId],
+	);
 
-function loadScores() {
-	try {
-		if (!fs.existsSync(DATA_FILE)) return {};
-		return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-	}
-	catch {
-		return {};
-	}
+	const byCategory = row?.by_category ?? {};
+	const byLogo = row?.by_logo ?? {};
+	const collectedIds = row?.collected_ids ?? [];
+
+	if (!byCategory[category]) byCategory[category] = { correct: 0, total: 0 };
+	byCategory[category].total++;
+	if (isCorrect) byCategory[category].correct++;
+
+	if (!byLogo[logoName]) byLogo[logoName] = { correct: 0, total: 0, difficulty };
+	byLogo[logoName].total++;
+	if (isCorrect) byLogo[logoName].correct++;
+
+	if (isCorrect && !collectedIds.includes(logoId)) collectedIds.push(logoId);
+
+	await pool.execute(
+		`INSERT INTO logo_quiz_scores (guild_id, user_id, username, total_score, correct_count, total_answered, by_category, by_logo, collected_ids)
+		 VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?)
+		 ON DUPLICATE KEY UPDATE
+		   username = VALUES(username),
+		   total_score = total_score + VALUES(total_score),
+		   correct_count = correct_count + VALUES(correct_count),
+		   total_answered = total_answered + 1,
+		   by_category = VALUES(by_category),
+		   by_logo = VALUES(by_logo),
+		   collected_ids = VALUES(collected_ids)`,
+		[
+			guildId, userId, username,
+			isCorrect ? points : 0,
+			isCorrect ? 1 : 0,
+			JSON.stringify(byCategory),
+			JSON.stringify(byLogo),
+			JSON.stringify(collectedIds),
+		],
+	);
 }
 
-function saveScores(scores) {
-	const dir = path.dirname(DATA_FILE);
-	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-	fs.writeFileSync(DATA_FILE, JSON.stringify(scores, null, 2), 'utf8');
+async function getServerRanking(guildId) {
+	const [rows] = await pool.execute(
+		'SELECT * FROM logo_quiz_scores WHERE guild_id = ? ORDER BY total_score DESC LIMIT 10',
+		[guildId],
+	);
+	return rows.map(r => ({
+		userId: r.user_id,
+		username: r.username,
+		totalScore: r.total_score,
+		correctCount: r.correct_count,
+		totalAnswered: r.total_answered,
+		byCategory: r.by_category,
+		byLogo: r.by_logo,
+		collectedIds: r.collected_ids,
+	}));
 }
 
-function ensureUser(scores, guildId, userId) {
-	if (!scores[guildId]) scores[guildId] = {};
-	if (!scores[guildId][userId]) {
-		scores[guildId][userId] = {
-			username: '',
-			totalScore: 0,
-			correctCount: 0,
-			totalAnswered: 0,
-			byCategory: {},
-			byLogo: {},
-			collectedIds: [],
-		};
-	}
-	return scores[guildId][userId];
+async function getUserStats(guildId, userId) {
+	const [[row]] = await pool.execute(
+		'SELECT * FROM logo_quiz_scores WHERE guild_id = ? AND user_id = ?',
+		[guildId, userId],
+	);
+	if (!row) return null;
+	return {
+		userId: row.user_id,
+		username: row.username,
+		totalScore: row.total_score,
+		correctCount: row.correct_count,
+		totalAnswered: row.total_answered,
+		byCategory: row.by_category,
+		byLogo: row.by_logo,
+		collectedIds: row.collected_ids,
+	};
 }
 
-function recordAnswer({ guildId, userId, username, logoId, logoName, category, difficulty, isCorrect, points }) {
-	const scores = loadScores();
-	const user = ensureUser(scores, guildId, userId);
-
-	user.username = username;
-	user.totalAnswered++;
-
-	if (isCorrect) {
-		user.correctCount++;
-		user.totalScore += points;
-		if (!user.collectedIds.includes(logoId)) {
-			user.collectedIds.push(logoId);
-		}
-	}
-
-	if (!user.byCategory[category]) user.byCategory[category] = { correct: 0, total: 0 };
-	user.byCategory[category].total++;
-	if (isCorrect) user.byCategory[category].correct++;
-
-	if (!user.byLogo[logoName]) user.byLogo[logoName] = { correct: 0, total: 0, difficulty };
-	user.byLogo[logoName].total++;
-	if (isCorrect) user.byLogo[logoName].correct++;
-
-	saveScores(scores);
-}
-
-function getServerRanking(guildId) {
-	const scores = loadScores();
-	if (!scores[guildId]) return [];
-	return Object.entries(scores[guildId])
-		.map(([userId, data]) => ({ userId, ...data }))
-		.sort((a, b) => b.totalScore - a.totalScore)
-		.slice(0, 10);
-}
-
-function getUserStats(guildId, userId) {
-	const scores = loadScores();
-	return scores[guildId]?.[userId] ?? null;
-}
-
-function getGlobalLogoStats(guildId) {
-	const scores = loadScores();
-	if (!scores[guildId]) return {};
+async function getGlobalLogoStats(guildId) {
+	const [rows] = await pool.execute(
+		'SELECT by_logo FROM logo_quiz_scores WHERE guild_id = ?',
+		[guildId],
+	);
 	const logoStats = {};
-	for (const user of Object.values(scores[guildId])) {
-		for (const [logo, d] of Object.entries(user.byLogo ?? {})) {
+	for (const row of rows) {
+		for (const [logo, d] of Object.entries(row.by_logo ?? {})) {
 			if (!logoStats[logo]) logoStats[logo] = { correct: 0, total: 0 };
 			logoStats[logo].correct += d.correct;
 			logoStats[logo].total += d.total;
