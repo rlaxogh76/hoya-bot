@@ -15,12 +15,12 @@ const GRADE_COLORS = {
 
 const PLACEHOLDER = 'https://avatars.githubusercontent.com/u/108007761?v=4';
 const GRADE_THUMBNAILS = {
-	'대길': '../../assets/fortune/happy.gif',
-	'중길': '../../assets/fortune/vibing.gif',
-	'소길': '../../assets/fortune/happy2.gif',
-	'말길': '../../assets/fortune/huh.gif',
-	'흉':   '../../assets/fortune/suspect.gif',
-	'대흉': '../../assets/fortune/boom.gif',
+	'대길': 'https://github.com/rlaxogh76/hoya-bot/blob/main/assets/fortune/happy.gif?raw=true',
+	'중길': 'https://github.com/rlaxogh76/hoya-bot/blob/main/assets/fortune/vibing.gif?raw=true',
+	'소길': 'https://github.com/rlaxogh76/hoya-bot/blob/main/assets/fortune/happy2.gif?raw=true',
+	'말길': 'https://github.com/rlaxogh76/hoya-bot/blob/main/assets/fortune/huh.gif?raw=true',
+	'흉':   'https://github.com/rlaxogh76/hoya-bot/blob/main/assets/fortune/suspect.gif?raw=true',
+	'대흉': 'https://github.com/rlaxogh76/hoya-bot/blob/main/assets/fortune/boom.gif?raw=true',
 };
 
 function getTodayKST() {
