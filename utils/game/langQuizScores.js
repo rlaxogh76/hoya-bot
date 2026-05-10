@@ -1,74 +1,73 @@
-const fs = require('fs');
-const path = require('path');
+const pool = require('../db');
 
-const DATA_FILE = path.join(__dirname, '../../data/langQuizScores.json');
+async function recordAnswer({ guildId, userId, username, language, difficulty, isCorrect, points }) {
+	const [[row]] = await pool.execute(
+		'SELECT * FROM lang_quiz_scores WHERE guild_id = ? AND user_id = ?',
+		[guildId, userId],
+	);
 
-function loadScores() {
-	try {
-		if (!fs.existsSync(DATA_FILE)) return {};
-		return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-	}
-	catch {
-		return {};
-	}
+	const byLanguage = row?.by_language ?? {};
+	const byDifficulty = row?.by_difficulty ?? {};
+
+	if (!byLanguage[language]) byLanguage[language] = { correct: 0, total: 0 };
+	byLanguage[language].total++;
+	if (isCorrect) byLanguage[language].correct++;
+
+	if (!byDifficulty[difficulty]) byDifficulty[difficulty] = { correct: 0, total: 0 };
+	byDifficulty[difficulty].total++;
+	if (isCorrect) byDifficulty[difficulty].correct++;
+
+	await pool.execute(
+		`INSERT INTO lang_quiz_scores (guild_id, user_id, username, total_score, correct_count, total_answered, by_language, by_difficulty)
+		 VALUES (?, ?, ?, ?, ?, 1, ?, ?)
+		 ON DUPLICATE KEY UPDATE
+		   username = VALUES(username),
+		   total_score = total_score + VALUES(total_score),
+		   correct_count = correct_count + VALUES(correct_count),
+		   total_answered = total_answered + 1,
+		   by_language = VALUES(by_language),
+		   by_difficulty = VALUES(by_difficulty)`,
+		[
+			guildId, userId, username,
+			isCorrect ? points : 0,
+			isCorrect ? 1 : 0,
+			JSON.stringify(byLanguage),
+			JSON.stringify(byDifficulty),
+		],
+	);
 }
 
-function saveScores(scores) {
-	const dir = path.dirname(DATA_FILE);
-	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-	fs.writeFileSync(DATA_FILE, JSON.stringify(scores, null, 2), 'utf8');
+async function getServerRanking(guildId) {
+	const [rows] = await pool.execute(
+		'SELECT * FROM lang_quiz_scores WHERE guild_id = ? ORDER BY total_score DESC LIMIT 10',
+		[guildId],
+	);
+	return rows.map(r => ({
+		userId: r.user_id,
+		username: r.username,
+		totalScore: r.total_score,
+		correctCount: r.correct_count,
+		totalAnswered: r.total_answered,
+		byLanguage: r.by_language,
+		byDifficulty: r.by_difficulty,
+	}));
 }
 
-function ensureUser(scores, guildId, userId) {
-	if (!scores[guildId]) scores[guildId] = {};
-	if (!scores[guildId][userId]) {
-		scores[guildId][userId] = {
-			username: '',
-			totalScore: 0,
-			correctCount: 0,
-			totalAnswered: 0,
-			byLanguage: {},
-			byDifficulty: {},
-		};
-	}
-	return scores[guildId][userId];
-}
-
-function recordAnswer({ guildId, userId, username, language, difficulty, isCorrect, points }) {
-	const scores = loadScores();
-	const user = ensureUser(scores, guildId, userId);
-
-	user.username = username;
-	user.totalAnswered++;
-
-	if (isCorrect) {
-		user.correctCount++;
-		user.totalScore += points;
-	}
-
-	if (!user.byLanguage[language]) user.byLanguage[language] = { correct: 0, total: 0 };
-	user.byLanguage[language].total++;
-	if (isCorrect) user.byLanguage[language].correct++;
-
-	if (!user.byDifficulty[difficulty]) user.byDifficulty[difficulty] = { correct: 0, total: 0 };
-	user.byDifficulty[difficulty].total++;
-	if (isCorrect) user.byDifficulty[difficulty].correct++;
-
-	saveScores(scores);
-}
-
-function getServerRanking(guildId) {
-	const scores = loadScores();
-	if (!scores[guildId]) return [];
-	return Object.entries(scores[guildId])
-		.map(([userId, data]) => ({ userId, ...data }))
-		.sort((a, b) => b.totalScore - a.totalScore)
-		.slice(0, 10);
-}
-
-function getUserStats(guildId, userId) {
-	const scores = loadScores();
-	return scores[guildId]?.[userId] ?? null;
+async function getUserStats(guildId, userId) {
+	const [[row]] = await pool.execute(
+		'SELECT * FROM lang_quiz_scores WHERE guild_id = ? AND user_id = ?',
+		[guildId, userId],
+	);
+	if (!row) return null;
+	return {
+		userId: row.user_id,
+		username: row.username,
+		totalScore: row.total_score,
+		correctCount: row.correct_count,
+		totalAnswered: row.total_answered,
+		byLanguage: row.by_language,
+		byDifficulty: row.by_difficulty,
+	};
 }
 
 module.exports = { recordAnswer, getServerRanking, getUserStats };
