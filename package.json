@@ -10,16 +10,21 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch:json-server": "json-server db.json --port 3000",
     "watch:vite": "vite",
-    "dev": "concurrently npm:watch:*"
+    "dev": "concurrently npm:watch:*",
+    "start": "node index.js"
   },
   "dependencies": {
     "app-root-path": "^3.1.0",
     "discord.js": "^14.25.1",
     "html-to-image": "^1.11.13",
+    "node-fetch": "^2.7.0",
     "puppeteer": "^24.41.0",
     "undici": "^7.24.4",
     "winston": "^3.19.0",
     "winston-daily-rotate-file": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
