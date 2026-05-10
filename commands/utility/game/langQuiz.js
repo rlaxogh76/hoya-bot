@@ -652,7 +652,7 @@ async function handleStats(interaction) {
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('언어퀴즈')
+		.setName('언어 퀴즈')
 		.setDescription('프로그래밍 언어 퀴즈')
 		.addSubcommand((sub) =>
 			sub.setName('시작')
