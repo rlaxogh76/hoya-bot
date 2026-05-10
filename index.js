@@ -8,7 +8,7 @@ const {
 	GatewayIntentBits,
 	MessageFlags,
 } = require('discord.js');
-const { token } = require('./config.json');
+const token = process.env.DISCORD_TOKEN;
 
 const logger = require('./logger');
 
@@ -62,31 +62,28 @@ client.on(Events.InteractionCreate, async (interaction) => {
 // 4. 시크릿키(토큰)을 통해 봇 로그인 실행
 client.commands = new Collection();
 
+function loadCommandFiles(dirPath) {
+	const files = [];
+	for (const entry of fs.readdirSync(dirPath)) {
+		const fullPath = path.join(dirPath, entry);
+		if (fs.statSync(fullPath).isDirectory()) {
+			files.push(...loadCommandFiles(fullPath));
+		}
+		else if (entry.endsWith('.js')) {
+			files.push(fullPath);
+		}
+	}
+	return files;
+}
+
 const foldersPath = path.join(__dirname, 'commands');
-const commandFolders = fs.readdirSync(foldersPath); // 파일 동기식 읽기 선언
-
-// 5. 파일 동기식으로 읽어들이기
-for (const folder of commandFolders) {
-	const commandsPath = path.join(foldersPath, folder);
-	const commandFiles = fs
-		.readdirSync(commandsPath)
-		.filter((file) => file.endsWith('.js'));
-
-	// 6. 각 명령어 파일을 클라이언트에 설정
-	for (const file of commandFiles) {
-		const filePath = path.join(commandsPath, file);
-		const command = require(filePath);
-
-		// 7. 명령어에 필요한 속성 확인 후 설정
-		if ('data' in command && 'execute' in command) {
-			client.commands.set(command.data.name, command);
-		}
-		else {
-			// 8. 경고 메시지 출력
-			logger.warn(
-				`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`,
-			);
-		}
+for (const filePath of loadCommandFiles(foldersPath)) {
+	const command = require(filePath);
+	if ('data' in command && 'execute' in command) {
+		client.commands.set(command.data.name, command);
+	}
+	else {
+		logger.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 	}
 }
 
