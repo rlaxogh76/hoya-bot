@@ -1,6 +1,6 @@
 // commands/utility/github.js
 const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require('discord.js');
-const { githubToken } = require('../../config.json');
+const githubToken = process.env.GITHUB_TOKEN 
 const logger = require('../../logger');
 
 const ghHeaders = {
