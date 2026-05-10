@@ -1,5 +1,6 @@
 // 1. 주요 클래스 가져오기
 require('dotenv').config();
+const initDb = require('./utils/initDb');
 const fs = require('node:fs');
 const path = require('node:path');
 const {
@@ -88,7 +89,12 @@ for (const filePath of loadCommandFiles(foldersPath)) {
 	}
 }
 
-client.login(token);
+initDb()
+	.then(() => client.login(token))
+	.catch((err) => {
+		logger.error('[initDb 실패]', err);
+		process.exit(1);
+	});
 
 process.on('uncaughtException', (error) => {
 	logger.error('[uncaughtException]', error);
