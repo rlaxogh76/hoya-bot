@@ -461,6 +461,16 @@ async function endQuiz(session, channel) {
 // ─── 서브커맨드 핸들러 ────────────────────────────────────────────────────────
 
 async function handleStart(interaction) {
+	const channel = interaction.channel
+		?? await interaction.client.channels.fetch(interaction.channelId).catch(() => null);
+
+	if (!channel) {
+		return interaction.reply({
+			content: '채널에 접근할 수 없습니다. 봇의 채널 권한(메시지 보기)을 확인해주세요.',
+			ephemeral: true,
+		});
+	}
+
 	const key = `${interaction.guildId}_${interaction.user.id}`;
 	if (sessions.has(key)) {
 		return interaction.reply({
@@ -516,7 +526,7 @@ async function handleStart(interaction) {
 		ephemeral: true,
 	});
 
-	await showQuestion(session, interaction.channel);
+	await showQuestion(session, channel);
 }
 
 async function handleStop(interaction) {
